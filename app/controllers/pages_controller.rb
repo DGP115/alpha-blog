@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 class PagesController < ApplicationController
 
@@ -6,7 +7,7 @@ class PagesController < ApplicationController
   end
 
   def about
-    #  Comment to satisft rubocop
+    #  Comment to satisfy rubocop
   end
 
 end

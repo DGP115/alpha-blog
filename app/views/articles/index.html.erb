@@ -1,0 +1,23 @@
+<h1>Articles Listing page </h1>
+
+<table>
+  <caption>Articles</caption>
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @articles.each do |article| %>
+        <tr>
+          <td><%= article.title %></td>
+          <td><%= article.description %></td>
+          <td>placeholder for actions</td>
+        </tr>
+      <% end %>
+
+    </tbody>
+
+</table>

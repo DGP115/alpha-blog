@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
+# Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+#
 Rails.application.routes.draw do
-
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
   # Defines the root path route ("/")
   # root "articles#index"
 
@@ -10,8 +11,10 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   #  Adding an About (static) page:
-  #   The get tells Rails what to do and the
-  #   to tells it where to go to find the controller action for the About page
+  #   The below maps the uri provided by the  Rails Get action to the controller given by
+  #   "pages" and the "about" action within that contoller
   get 'about', to: 'pages#about'
 
+  # Provides the basic CRUD routes [from base class] for articles
+  resources :articles, only: %i[show index]
 end
