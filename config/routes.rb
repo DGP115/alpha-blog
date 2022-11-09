@@ -16,5 +16,5 @@ Rails.application.routes.draw do
   get 'about', to: 'pages#about'
 
   # Provides the basic CRUD routes [from base class] for articles
-  resources :articles, only: %i[show index]
+  resources :articles, only: %i[show index new create edit update]
 end
