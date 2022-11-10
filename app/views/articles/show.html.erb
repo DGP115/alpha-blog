@@ -1,3 +1,7 @@
 <h1>This is the Articles Show page </h1>
 <p><strong>Title: </strong><%= @article.title %></p>
 <p><strong>Description: </strong><%= @article.description %></p>
+<%= link_to 'Edit' , edit_article_path(@article.id), data: { turbo_method: :edit } %> |
+<%= link_to 'Delete', article_path(@article.id),
+        data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %> |
+<%= link_to 'Return to articles list' , articles_path(@article.id), data: { turbo_method: :index } %>

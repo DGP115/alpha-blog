@@ -19,7 +19,7 @@ class ArticlesController < ApplicationController
 
   def new
     # Create a new article object immediately upon entry of this method so that
-    # a valid article object exists when the Show etc.pages are first entered.
+    # a valid article object exists when the Show etc. pages are first entered.
     # Otherwise, the error trapping done there will fail
     @article = Article.new
   end
@@ -95,6 +95,38 @@ class ArticlesController < ApplicationController
       #       URI               | /articles/:id(.:format)
       #       Controller#Action | articles#show
       redirect_to article_path(@article)
+
+    else
+
+      # Error trapping
+      # Re-render the "edit" article page.
+      # Because the save returned false, the error trapping on the "edit" page
+      # will display the errors
+      render 'edit', status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    # Instantiate an article object based on what is returned from the browser via params hash
+    @article = Article.find(params[:id])
+
+    if @article.destroy
+      #
+      # Generate a confirmation message for the user.
+      flash[:notice] = 'Article was deleted successfully.'
+
+      # Now that the article is deleted, we need to tell Rails what to do.
+      # Convention would take the user to the articles list page
+      #
+      # Note:  We knew that the path to the articles listing page is articles_path because
+      # from $rails routes --expanded we see:
+      # [ Route 3 ]-----------------------------------------------------------------
+      # Prefix            | articles  <-- Therefore the path is articles_path
+      # Verb              | GET
+      # URI               | /articles(.:format)
+      # Controller#Action | articles#index
+
+      redirect_to articles_path
 
     else
 

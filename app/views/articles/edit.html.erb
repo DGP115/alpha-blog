@@ -33,7 +33,8 @@
     <%= f.text_area :description %>
   </p>
   <p>
-    <%= f.submit %>
+    <%= f.submit %> |
+    <%= link_to 'Cancel and return to articles list' , articles_path(@article.id), data: { turbo_method: :index } %>
   </p>
 
 <% end %>
