@@ -2,16 +2,11 @@
 
 # This is the controller for the articles resource
 class ArticlesController < ApplicationController
-  def show
-    # 1.  Recall that the http GET function passes to the Controller the current article
-    #     (from the browser) in the URI given by articles/id
-    #     Rails passes this argument in the form of the params hash, so we can get the id by
-    #     referring to params[:id]
-    # 2.  Use an instance variable, which in this case is an object, as Rails makes it
-    #     available to the View for us
+  # before_action is a helper.  It is run first [limited to only statement] as a
+  # means of DRYing code
+  before_action :set_article, only: %i[show edit update destroy]
 
-    @article = Article.find(params[:id])
-  end
+  def show; end
 
   def index
     @articles = Article.all
@@ -24,16 +19,7 @@ class ArticlesController < ApplicationController
     @article = Article.new
   end
 
-  def edit
-    # 1.  Recall that the http GET function passes to the Controller the current article
-    #     (from the browser) in the URI given by articles/id
-    #     Rails passes this argument in the form of the params hash, so we can get the id by
-    #     referring to params[:id]
-    # 2.  Use an instance variable, which in this case is an object, as Rails makes it
-    #     available to the View for us
-
-    @article = Article.find(params[:id])
-  end
+  def edit; end
 
   def create
     # Instantiate an article object based on what is returned from the browser via params hash
@@ -41,7 +27,7 @@ class ArticlesController < ApplicationController
     # and description attributes directly:
     #   1. use the .require method to identify that it is the article resource we want
     #   2. .permit  method to specifically retrieve the attributes listed
-    @article = Article.new(params.require(:article).permit(:title, :description))
+    @article = Article.new(whitelist_article_params)
 
     if @article.save
       #
@@ -74,10 +60,7 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    # Instantiate an article object based on what is returned from the browser via params hash
-    @article = Article.find(params[:id])
-
-    if @article.update(params.require(:article).permit(:title, :description))
+    if @article.update(whitelist_article_params)
       #
       # Generate a confirmation message for the user.
       flash[:notice] = 'Article was updated successfully.'
@@ -107,9 +90,6 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    # Instantiate an article object based on what is returned from the browser via params hash
-    @article = Article.find(params[:id])
-
     if @article.destroy
       #
       # Generate a confirmation message for the user.
@@ -136,5 +116,21 @@ class ArticlesController < ApplicationController
       # will display the errors
       render 'edit', status: :unprocessable_entity
     end
+  end
+
+  private
+
+  # 1.  Recall that the http GET function passes to the Controller the current article
+  #     (from the browser) in the URI given by articles/id
+  #     Rails passes this argument in the form of the params hash, so we can get the id by
+  #     referring to params[:id]
+  # 2.  Use an instance variable, which in this case is an object, as Rails makes it
+  #     available to the View for us
+  def set_article
+    @article = Article.find(params[:id])
+  end
+
+  def whitelist_article_params
+    params.require(:article).permit(:title, :description)
   end
 end

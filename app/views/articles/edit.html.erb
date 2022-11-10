@@ -1,40 +1,6 @@
 <h1>Edit an article</h1>
-<!--  Trap for errors (coming from the articles controller) that occurred while
-      trying to save a new article.
-      Note:   This code would fail on first use unless @article is instantiated first.
-              That happens in the edit action (in articles controller)-->
-<% if @article.errors.any? %>
-  <h2>The following error(s) occurred while trying to save the last entry</h2>
-  <ul>
-    <% @article.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  </ul>
-<% end %>
-
-<!--  Use form_with helper to aid with the form for editing an article.
-        e.g., it will pre-populate the edit form with the article's contents and
-        label the submit button as "Update Article".  My word...
-
-        Because this is the "edit" action, we need the article id to know which article
-        is being edited.  As per the route, that id is provided in the URI.
-        Rails and the forms helper know all this, so all we have to do is pass along
-        model: @article and Rails will access the id from the article object.
-
-        local :true speficies form_with to use local http and not ajax
--->
-<%= form_with(model: @article, local: true) do |f| %>
-  <p>
-    <%= f.label :title, "Article Title:" %><br>
-    <%= f.text_field :title %>
-  </p>
-  <p>
-    <%= f.label :description, "Article Description:" %><br>
-    <%= f.text_area :description %>
-  </p>
-  <p>
-    <%= f.submit %> |
-    <%= link_to 'Cancel and return to articles list' , articles_path(@article.id), data: { turbo_method: :index } %>
-  </p>
-
-<% end %>
+<%= render 'articles/error_msgs' %>
+<%= render 'articles/form' %>
+<p>
+  <%= link_to 'Cancel and return to articles list' , articles_path(@article.id), data: { turbo_method: :index } %>
+</p>

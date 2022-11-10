@@ -11,11 +11,8 @@
   </head>
 
   <body>
-
-    <!-- Add display of flash messages, if there are any -->
-    <% flash.each do |type, msg| %>
-      <div><%= msg %></div>
-    <% end %>
+    <!-- The render below effectively includes the partial layouts/_messages here-->
+    <%= render 'layouts/messages' %>
 
     <%= yield %>
 
