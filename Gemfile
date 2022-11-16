@@ -81,3 +81,5 @@ group :production do
   # For production (heroku), use the postgresql [pg] database
   gem "pg"
 end
+
+gem "importmap-rails", "~> 1.1"
