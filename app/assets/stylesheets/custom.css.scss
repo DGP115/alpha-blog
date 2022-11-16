@@ -1,1 +1,80 @@
+/*==================== Grid Styles ====================
+  Adjust our box size to use the border-box model
+  Use the universal selector, *, along with universal pseudo-elements, *:before and *:after, to select every imaginable element and change the box-sizing to border-box. Remember, we’re going to want to include the necessary broweserTvendor prefixes for the box-sizing property, as it is a relatively new property.
+*/
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+      -ms-box-sizing: border-box;
+          box-sizing: border-box;
+}
 
+/* Create a class to serve as a container for our elements */
+.container,
+.grid {
+  margin: 0 auto;
+  width: 960px;
+}
+.container {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+/*==================== Clearfix ====================
+Recall that floats enable content to wrap around other content.
+While sometimes good, we need a way to turn it off in the CSS cascade and layout
+The "group" class below clears floats
+*/
+.group:before,
+.group:after {
+  content: "";
+  display: table;
+}
+.group:after {
+  clear: both;
+}
+.group {
+  clear: both;
+  *zoom: 1;
+}
+
+.myjumbotron {
+  margin: 20px 100px;
+  padding: 40px;
+  background-color: #68adf3;
+  border: round;
+  text-align: center;
+  background-image: url("AlphaBlog_HomeImage.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 400px;
+}
+
+.myhero {
+  color:blue;
+  font-size: 24px;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.nav-link {
+  color:white !important;
+}
+
+.mytitle {
+  color:antiquewhite
+}
+
+#logo {
+  color:antiquewhite
+}
+
+#page-backer {
+  flex: 1 0 auto;
+  background: -webkit-linear-gradient(to right,#bdbec4, #acaee0);
+  background: -moz-linear-gradient(to right,#bdbec4, #acaee0);
+  background: linear-gradient(to right,#bdbec4, #acaee0);
+}

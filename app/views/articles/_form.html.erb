@@ -1,24 +1,42 @@
-<!--  Use form_with helper to aid with the form for editing an article.
-        e.g., it will pre-populate the edit form with the article's contents and
-        label the submit button as "Update Article".  My word...
+<!--  Use form_with helper to aid with the form for creating a new article and editing an
+      existing article. e.g.,
+        - For a new article, the "submit" button will have teh label "Create Artcile"
+        - For an existing article, it will pre-populate the edit form with the article's contents and label the "submit" button as "Update Article".
+        - My word...
 
-        Because this is the "edit" action, we need the article id to know which article
-        is being edited.  As per the route, that id is provided in the URI.
+        Because the "new" and "edit" actions need the article object to know which article
+        is being edited, as per the route, the artcile id is provided in the URI from the browser.
         Rails and the forms helper know all this, so all we have to do is pass along
         model: @article and Rails will access the id from the article object.
 
         local :true speficies form_with to use local http and not ajax
 -->
-<%= form_with(model: @article, local: true) do |f| %>
-  <p>
-    <%= f.label :title, "Article Title:" %><br>
-    <%= f.text_field :title %>
-  </p>
+<div class="container row justify-content-center col-10">
 
-  <p>
-    <%= f.label :description, "Article Description:" %><br>
-    <%= f.text_area :description %>
-  </p>
+  <%= form_with(model: @article, local: true, class: "shadow p-3 mb-3 bg-grey rounded") do |f| %>
 
-  <p><%= f.submit %></p>
-<% end %>
+    <div class="form-group row">
+      <%= f.label :title, class: "col-2 col-form-label" %>
+      <div class="col-8">
+        <%= f.text_field :title, class: "form-control shadow rounded", placeholder: "enter a title" %>
+      </div>
+    </div>
+
+    <div class="form-group row mt-2">
+      <%= f.label :description, class: "col-2 col-form-label" %>
+      <div class="col-9">
+        <%= f.text_area :description, rows:"10", class: "form-control shadow rounded" %>
+      </div>
+    </div>
+
+    <div class="mt-2 text-center">
+     <%= f.submit %>
+    </div>
+
+  <% end %>
+
+</div>
+
+<div class="text-center mt-2 mb-3">
+  <%= link_to '[ Cancel and return to articles list ]', articles_path(@article.id), data: { turbo_method: :index }, class: "text-decoration-none" %>
+</div>

@@ -1,7 +1,34 @@
-<h1>This is the Articles Show page </h1>
-<p><strong>Title: </strong><%= @article.title %></p>
-<p><strong>Description: </strong><%= @article.description %></p>
-<%= link_to 'Edit' , edit_article_path(@article.id), data: { turbo_method: :edit } %> |
-<%= link_to 'Delete', article_path(@article.id),
-        data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %> |
-<%= link_to 'Return to articles list' , articles_path(@article.id), data: { turbo_method: :index } %>
+<div class="container">
+	<h5 class="text-center mt-2 mb-1"><%= @article.title %></h5>
+
+	<div class="row justify-content-md-center">
+		<div class="col-8 mt-1">
+			<div class="card text-center shadow mb-2 bg-white rounded">
+
+				<div class="card-header">
+					to be added: article author
+				</div>
+
+				<div class="card-body">
+					<div class="card-text text-start"><%= simple_format(@article.description) %></div>
+					<%= link_to "Edit", edit_article_path(@article.id),
+						class: "btn btn-outline-primary btn-sm" %>
+					<%= link_to "Delete", article_path(@article.id),
+						class: "btn btn-outline-danger btn-sm",
+						data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+				</div>
+
+				<div class="card-footer text-muted">
+					<small>
+						Created <%= time_ago_in_words(@article.created_at) %> ago.  Edited <%=time_ago_in_words(@article.updated_at) %> ago
+					</small>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<%= link_to 'Return to Articles list' , articles_path(@article.id),
+  data: { turbo_method: :index },class:"row justify-content-md-center text-decoration-none" %>
+

@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get 'about', to: 'pages#about'
 
   # Provides the basic CRUD routes [from base class] for articles
-  # To exose the routes incrementally or as a subset, use the ",only" modifier
+  # To expose the routes incrementally or as a subset, use the ",only" modifier.
   # resources :articles, only: %i[show index new create edit update destroy]
   # Expose all routes of the articles resource
   resources :articles

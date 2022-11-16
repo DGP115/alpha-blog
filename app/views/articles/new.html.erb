@@ -1,6 +1,6 @@
-<h1>Create a new article</h1>
-<%= render 'articles/error_msgs' %>
-<%= render 'articles/form' %>
-<p>
-  <%= link_to 'Cancel and return to articles list' , articles_path(@article.id), data: { turbo_method: :index } %>
-</p>
+  <div class="container">
+    <h4 class="text-center mt-2">Create a New Article</h4>
+  </div>
+
+  <%= render 'shared/error_msgs' %>
+  <%= render 'articles/form' %>

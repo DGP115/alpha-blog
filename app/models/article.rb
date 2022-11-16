@@ -8,14 +8,14 @@ class Article < ApplicationRecord
   # Recall that all the getter, setter methods we need are already provided by the
   # inheritance from Application Record
 
-  #  BUT: note that, by default, this model does include any constraints - known as validations
+  #  BUT: note that, by default, this model does not include any constraints - known as validations
   #  in Rails.  So they must be added here.
 
   #  Validations (i.e. Constraints).
-  #  NOTE:  Validations work at the object model level, not the database
-  #  Add a validation that article attribute "title" must have a value (when it is saved)
-  #  and length limits as shown.
-  #  Do the same for article attribute "description"
+  #   NOTE:  Validations work at the object model level, not the database.
+  #   Add a validation that article attribute "title" must have a value (when it is saved)
+  #   and length limits as shown.
+  #   Do the same for article attribute "description"
   validates :title, presence: true, length: { minimum: 6, maximum: 100 }
   validates :description, presence: true, length: { minimum: 10, maximum: 300 }
 end

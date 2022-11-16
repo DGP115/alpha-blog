@@ -8,13 +8,21 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= javascript_include_tag "turbo", type: "module" %>
   </head>
 
-  <body>
-    <!-- The render below effectively includes the partial layouts/_messages here-->
-    <%= render 'layouts/messages' %>
+  <body class="d-flex flex-column">
+    <!-- The render statements below effectively include the referenced partial files here-->
+    <%= render 'layouts/navbar' %>
 
-    <%= yield %>
+    <div id="page-backer">
 
+      <%= render 'layouts/messages' %>
+
+      <%= yield %>
+
+      <%= render 'shared/footer' %>
+
+    </div>
   </body>
 </html>
