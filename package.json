@@ -6,11 +6,7 @@
     "build:css": "sass ./app/assets/stylesheets/application.sass.scss ./app/assets/builds/application.css --no-source-map"
   },
   "dependencies": {
-    "bootstrap": "5.2.2",
-    "popperjs": "2.11.16"
+    "@floating-ui/dom": "^1.0.6",
+    "bootstrap": "5.2.2"
   }
 }
-
-
-
-
