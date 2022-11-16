@@ -6,6 +6,7 @@
     "build:css": "sass ./app/assets/stylesheets/application.sass.scss ./app/assets/builds/application.css --no-source-map"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.6",
     "bootstrap": "5.2.2",
     "esbuild": "^0.15.14"
   }
