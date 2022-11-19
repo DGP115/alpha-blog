@@ -16,6 +16,7 @@ class Article < ApplicationRecord
   #   Add a validation that article attribute "title" must have a value (when it is saved)
   #   and length limits as shown.
   #   Do the same for article attribute "description"
+  belongs_to :user
   validates :title, presence: true, length: { minimum: 6, maximum: 100 }
   validates :description, presence: true, length: { minimum: 10, maximum: 300 }
 end

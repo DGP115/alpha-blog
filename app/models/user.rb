@@ -2,9 +2,10 @@
 
 # Class User serves as the Rails model for entity "user" in this blog app
 class User < ApplicationRecord
+  has_many :articles
   validates :username,  presence: true, uniqueness: { case_sensitive: false },
                         length: { minimum: 3, maximum: 25 }
   validates :email_address, presence: true, uniqueness: { case_sensitive: false },
-                            email: {mode: :strict, require_fqdn: true},
+                            email: { mode: :strict, require_fqdn: true },
                             length: { maximum: 105 }
 end
