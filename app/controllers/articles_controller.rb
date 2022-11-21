@@ -37,7 +37,7 @@ class ArticlesController < ApplicationController
       # Now that the article is saved, we need to tell Rails what to do.
       # Convention would take the user to the newly created article's Show page
       # Examination of Rails route for the Show action (See below) indicates:
-      #  "Prefix" of "article" --> telling us the path to the article's show page is article_patch
+      #  "Prefix" of "article" --> telling us the path to the article's show page is article_path
       #  "URI" --> telling us we need to provide the unique article id.
       #            We can do this by providing Rails the article object.  It "knows" to get the id
       #            from the object.

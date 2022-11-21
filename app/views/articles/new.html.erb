@@ -2,5 +2,5 @@
     <h4 class="text-center mt-2">Create a New Article</h4>
   </div>
 
-  <%= render 'shared/error_msgs' %>
+  <%= render 'shared/error_msgs', obj: @article %>
   <%= render 'articles/form' %>
