@@ -9,7 +9,9 @@ class ArticlesController < ApplicationController
   def show; end
 
   def index
-    @articles = Article.all.order('created_at DESC')
+    # Utilizing the will_paginate gem to include pagination as this code was
+    # @articles = Article.all, which could return many rows
+    @articles = Article.paginate(page: params[:page], per_page: 5).order('created_at DESC')
   end
 
   def new

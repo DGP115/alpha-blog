@@ -43,6 +43,8 @@ gem "sassc-rails"
 
 gem 'bootstrap', '~> 5.2.2'
 
+gem 'will_paginate', '~> 3.3', '>= 3.3.1'
+
 gem 'email_validator', '~> 2.2', '>= 2.2.4'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]

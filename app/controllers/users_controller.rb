@@ -7,13 +7,15 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
 
   def show
-    # In prerparation for the user show page, get a list of the articles authored by
+    # In preparation for the user show page, get a list of the articles authored by
     # the current user.  Note @articles, here, is an array, not an object
-    @articles = @user.articles.order('created_at DESC')
+    @articles = @user.articles.paginate(page: params[:page], per_page: 5).order('created_at DESC')
   end
 
   def index
-    @users = User.all.order('username ASC')
+    # Utilizing the will_paginate gem to include pagination as this code was
+    # @users = User.all, which could return many rows
+    @users = User.paginate(page: params[:page], per_page: 5).order('username ASC')
   end
 
   def new
