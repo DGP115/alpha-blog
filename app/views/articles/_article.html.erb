@@ -5,11 +5,15 @@
         <div class="card text-center shadow mb-2 bg-white rounded">
 
           <div class="card-header">
-            by: <i><%= article.user.username if article.user %></i>
+            <% if article.user %>
+              <i>by: <%= link_to article.user.username,
+                                 user_path(article.user.id),
+                                 class: 'link text-decoration-none'  %></i>
+            <% end %>
           </div>
 
           <div class="card-body">
-            <h5 class="card-title"><%= link_to article.title, article_path(article), class: "link-dark text-decoration-none" %></h5>
+            <h5 class="card-title"><%= link_to article.title, article_path(article), class: 'link-dark text-decoration-none' %></h5>
             <p class="card-text">A sample &#8677; <%= truncate(article.description, length: 50) %></p>
             <%= link_to "View", article_path(article.id),
                 class: "btn btn-outline-success btn-sm" %>

@@ -6,7 +6,13 @@
 			<div class="card text-center shadow mb-2 bg-white rounded">
 
 				<div class="card-header">
-					by: <i><%= @article.user.username if @article.user %></i>
+          <% if @article.user %>
+            <i>by: <%= link_to @article.user.username,
+                               user_path(@article.user.id),
+                               class: 'link text-decoration-none'  %></i>
+						<i> <%= link_to avatar_for(@article.user, size:('50x50')),
+														user_path(@article.user.id) %> </i>
+          <% end %>
 				</div>
 
 				<div class="card-body">

@@ -9,11 +9,11 @@ class UsersController < ApplicationController
   def show
     # In prerparation for the user show page, get a list of the articles authored by
     # the current user.  Note @articles, here, is an array, not an object
-    @articles = @user.articles
+    @articles = @user.articles.order('created_at DESC')
   end
 
   def index
-    @users = Users.all
+    @users = User.all.order('username ASC')
   end
 
   def new
@@ -81,7 +81,7 @@ class UsersController < ApplicationController
       #       Verb              | GET
       #       URI               | /????/:id(.:format)
       #       Controller#Action | ?????#show
-      redirect_to articles_path
+      redirect_to user_path
 
     else
 
