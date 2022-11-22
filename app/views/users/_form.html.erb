@@ -37,7 +37,7 @@
     </div>
 
     <div class="mt-2 text-center">
-     <%= f.submit "Sign up" %>
+     <%= f.submit(@user.new_record? ? "Sign up" : "Update Profile") %>
     </div>
 
   <% end %>

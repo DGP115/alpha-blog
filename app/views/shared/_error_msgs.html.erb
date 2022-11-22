@@ -1,7 +1,7 @@
-<!--  Trap for errors (coming from the articles controller) that occurred while
-      trying to save a new article.
-      Note:   This code would fail on first use unless @article is instantiated first.
-              That happens in the edit action (in articles controller)-->
+<!--  Trap for errors (coming from the articles or users controller) that occurred while
+      trying to save a new article or user.
+      Note:   This code would fail on first use unless @article or @user is instantiated first.
+              That happens in the edit action (in controller)-->
 <% if obj.errors.any? %>
 
   <div class="container">

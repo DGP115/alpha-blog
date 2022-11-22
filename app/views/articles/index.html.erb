@@ -1,36 +1,4 @@
 
 <h2 class="text-center mt-2">Articles Listing</h2>
 
-<div class="container">
-  <% @articles.each do |article| %>
-    <div class="row justify-content-md-center">
-      <div class="col-8 mt-2">
-        <div class="card text-center shadow mb-2 bg-white rounded">
-
-          <div class="card-header">
-            by: <i><%= article.user.username if article.user %></i>
-          </div>
-
-          <div class="card-body">
-            <h5 class="card-title"><%= link_to article.title, article_path(article), class: "link-dark text-decoration-none" %></h5>
-            <p class="card-text">A sample &#8677; <%= truncate(article.description, length: 50) %></p>
-            <%= link_to "View", article_path(article.id),
-                class: "btn btn-outline-success btn-sm" %>
-            <%= link_to "Edit", edit_article_path(article.id),
-                class: "btn btn-outline-primary btn-sm" %>
-            <%= link_to "Delete", article_path(article.id),
-                class: "btn btn-outline-danger btn-sm",
-                data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-          </div>
-
-          <div class="card-footer text-muted">
-            <small>
-              Created <%= time_ago_in_words(article.created_at) %> ago.  Edited <%=time_ago_in_words(article.updated_at) %> ago
-            </small>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  <% end %>
-</div>
+<%= render 'articles/article' %>

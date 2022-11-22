@@ -1,0 +1,11 @@
+
+<h2 class="text-center mt-2"><%= "Articles authored by #{@user.username}" %></h2>
+
+<div class="text-center d-block mt-2">
+  <%= avatar_for(@user, size:('100x100')) %>
+</div>
+
+<%= render 'articles/article' %>
+
+<!-- rounded-circle shadow mx-auto d-block text-center mt-2>
+

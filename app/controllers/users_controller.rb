@@ -6,7 +6,11 @@ class UsersController < ApplicationController
   # means of DRYing code
   before_action :set_user, only: %i[show edit update destroy]
 
-  def show; end
+  def show
+    # In prerparation for the user show page, get a list of the articles authored by
+    # the current user.  Note @articles, here, is an array, not an object
+    @articles = @user.articles
+  end
 
   def index
     @users = Users.all
@@ -63,7 +67,7 @@ class UsersController < ApplicationController
     if @user.update(whitelist_user_params)
       #
       # Generate a confirmation message for the user.
-      flash[:notice] = 'User update was successful'
+      flash[:notice] = 'User profile was updated successfully'
 
       # Now that the user is updated, we need to tell Rails what to do.
       # Convention would take the app user to the newly updated user's Show page
@@ -77,7 +81,7 @@ class UsersController < ApplicationController
       #       Verb              | GET
       #       URI               | /????/:id(.:format)
       #       Controller#Action | ?????#show
-      redirect_to users_path(@user)
+      redirect_to articles_path
 
     else
 
