@@ -16,8 +16,10 @@
             <p class="card-text"><%= pluralize(user.articles.count, 'article') %> posted</p>
             <%= link_to "View Profile", user_path(user.id),
                 class: "btn btn-outline-success btn-sm" %>
-            <%= link_to "Edit Profile", edit_user_path(user.id),
-                class: "btn btn-outline-primary btn-sm" %>
+            <% if logged_in? && user == current_user %>
+              <%= link_to "Edit Profile", edit_user_path(user.id),
+                          class: "btn btn-outline-primary btn-sm" %>
+            <% end %>
           </div>
 
           <div class="card-footer text-muted">

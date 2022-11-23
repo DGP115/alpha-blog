@@ -53,6 +53,26 @@ The "group" class below clears floats
   height: 400px;
 }
 
+.btn-signup {
+  border-radius: 10px;
+  border: 2px;
+  color: blue;
+  background-color: wheat;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 400;
+  letter-spacing: .5px;
+  margin: 0;
+  position: relative;
+  top: 200px;
+  left: -10px
+}
+
+.btn-signup:hover {
+  color:  wheat;
+  background-color: blue;
+}
+
 .motto {
   position: relative;
   top: 90px;
