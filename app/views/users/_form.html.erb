@@ -9,7 +9,7 @@
         Rails and the forms helper know all this, so all we have to do is pass along
         resource: @user and Rails will access the id from the user object.
 
-        local :true speficies form_with to use local http and not ajax
+        local :true specifies form_with to use local http and not ajax
 -->
 <div class="container row justify-content-center col-10">
 
@@ -45,5 +45,6 @@
 </div>
 
 <div class="text-center mt-2 mb-3">
-  <%= link_to '[ Cancel and return to articles list ]', articles_path(), data: { turbo_method: :index }, class: "text-decoration-none" %>
+  <%= link_to '[ Cancel and return to articles list ]', articles_path(),
+              data: { turbo_method: :index }, class: "text-decoration-none" %>
 </div>

@@ -4,7 +4,7 @@
 class UsersController < ApplicationController
   # before_action is a helper.  It is run first [limited to only statement] as a
   # means of DRYing code
-  before_action :set_user, only: %i[show edit update destroy]
+  before_action :set_user, only: %i[show edit update]
 
   def show
     # In preparation for the user show page, get a list of the articles authored by
@@ -36,7 +36,10 @@ class UsersController < ApplicationController
     @user = User.new(whitelist_user_params)
 
     if @user.save
-      #
+
+      # For convenience, perform a log-in for the newly signed up user
+      session[:current_user_id] = @user.id
+
       # Generate a confirmation message for the user.
       flash[:notice] = "Welcome #{@user.username}.  You have successfully signed up."
 

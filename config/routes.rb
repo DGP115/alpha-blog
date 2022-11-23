@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   # Expose all routes of the articles resource
   resources :articles
 
-  # Routing for User forms
+  # Routes for User actions
   get 'signup', to: 'users#new'
 
   # The form_with statement in users/_form.html.erb needs to know where to post
@@ -34,4 +34,15 @@ Rails.application.routes.draw do
   # want the "new" method to be invoked by signup [as above] so we can omit it from the
   # resources statement
   resources :users, except: [:new]
+
+  # Login actions - to be managed by the sessions controller
+  #  1.  Login validation
+  get 'login', to: 'sessions#new'
+  #
+  # 2.  Create a session based on successful login.
+  #     Recall the HTTP verb "post" denotes creation of a new resource
+  post 'login', to: 'sessions#create'
+  #
+  # 3. Logout and thus delete a user session
+  delete 'logout', to: 'sessions#destroy'
 end
