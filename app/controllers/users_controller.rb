@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
   # The below ensures that a user that is not logged in can't access user profiles
   # by entering routes directly in the browser address bar
-  before_action :require_user, except: %i[show index]
+  before_action :require_user, only: %i[edit update]
   # The below runs after "set_user" (above) so "require_same_user" can use object
   # "@user" knowing it has been instantiated [because it is instantiated
   # in "set_user"]
