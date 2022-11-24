@@ -4,7 +4,10 @@
 class UsersController < ApplicationController
   # before_action is a helper.  It is run first [limited to only statement] as a
   # means of DRYing code
-  before_action :set_user, only: %i[show edit update]
+  before_action :set_user, only: %i[show edit update destroy]
+  # The below ensures that a user that is not logged in can't access user profiles
+  # by entering routes directly in the browser address bar
+  before_action :require_user, except: %i[show index]
   # The below runs after "set_user" (above) so "require_same_user" can use object
   # "@user" knowing it has been instantiated [because it is instantiated
   # in "set_user"]
@@ -103,32 +106,13 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if @user.destroy
-      #
-      # Generate a confirmation message for the user.
-      flash[:notice] = 'User was deleted successfully.'
-
-      # Now that the user is deleted, we need to tell Rails what to do.
-      # Convention would take the user to the articles list page
-      #
-      # Note:  We knew that the path to the articles listing page is articles_path because
-      # from $rails routes --expanded we see:
-      # [ Route 3 ]-----------------------------------------------------------------
-      # Prefix            | articles  <-- Therefore the path is articles_path
-      # Verb              | GET
-      # URI               | /articles(.:format)
-      # Controller#Action | articles#index
-
-      redirect_to articles_path
-
-    else
-
-      # Error trapping
-      # Re-render the "edit" user page.
-      # Because the save returned false, the error trapping on the "edit" page
-      # will display the errors
-      render 'edit', status: :unprocessable_entity
-    end
+    # 1.  Log user out
+    session[:current_user_id] = nil
+    # 2.  destroy user and all articles authored by user.  Articles destroy happens due to
+    #     "has_many :articles, dependent: :destroy" in user.rb.  Amazing
+    @user.destroy
+    flash[:notice] = 'User and all associated articles were deleted successfully.'
+    redirect_to root_path
   end
 
   private
@@ -148,7 +132,7 @@ class UsersController < ApplicationController
   end
 
   def require_same_user
-    return unless current_user != @auser
+    return unless current_user != @user
     flash[:alert] = 'You can only modify your own profile'
     redirect_to @user
   end
