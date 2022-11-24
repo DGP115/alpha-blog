@@ -5,6 +5,11 @@ class ArticlesController < ApplicationController
   # before_action is a helper.  It is run first [limited to only statement] as a
   # means of DRYing code
   before_action :set_article, only: %i[show edit update destroy]
+  before_action :require_user, except: %i[show index]
+  # The below runs after "require_user" so "require_same_user" can use object
+  # "current_user" knowing it has been instantiated [because it is instantiated
+  # in "require_user"]
+  before_action :require_same_user, only: %i[edit update destroy]
 
   def show; end
 
@@ -134,5 +139,11 @@ class ArticlesController < ApplicationController
 
   def whitelist_article_params
     params.require(:article).permit(:title, :description)
+  end
+
+  def require_same_user
+    return unless current_user != @article.user
+    flash[:alert] = 'You can only modify articles authored by you'
+    redirect_to @article
   end
 end

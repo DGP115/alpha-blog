@@ -5,6 +5,10 @@ class UsersController < ApplicationController
   # before_action is a helper.  It is run first [limited to only statement] as a
   # means of DRYing code
   before_action :set_user, only: %i[show edit update]
+  # The below runs after "set_user" (above) so "require_same_user" can use object
+  # "@user" knowing it has been instantiated [because it is instantiated
+  # in "set_user"]
+  before_action :require_same_user, only: %i[edit update destroy]
 
   def show
     # In preparation for the user show page, get a list of the articles authored by
@@ -141,5 +145,11 @@ class UsersController < ApplicationController
 
   def whitelist_user_params
     params.require(:user).permit(:username, :email_address, :password)
+  end
+
+  def require_same_user
+    return unless current_user != @auser
+    flash[:alert] = 'You can only modify your own profile'
+    redirect_to @user
   end
 end

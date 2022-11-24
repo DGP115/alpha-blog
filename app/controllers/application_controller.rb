@@ -18,4 +18,19 @@ class ApplicationController < ActionController::Base
       false
     end
   end
+
+  # rubocop prefers the style used below:
+  # def require_user
+  #   if !loggin_in?
+  #     flash[:alert] = 'You must be logged in to perform that action'
+  #     redirect_to login_path
+  #   end
+  # end
+  #  -------------- These methods protect the app from users who know enough to type
+  #                  valid routes into the browser address bar
+  def require_user
+    return if logged_in?
+    flash[:alert] = 'You must be logged in to perform that action'
+    redirect_to login_path
+  end
 end
