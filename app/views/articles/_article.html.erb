@@ -17,7 +17,7 @@
             <p class="card-text">A sample &#8677; <%= truncate(article.description, length: 50) %></p>
             <%= link_to "View", article_path(article.id),
                 class: "btn btn-outline-success btn-sm" %>
-            <% if logged_in? && article.user == current_user %> <!--Must check logged_in? first to ensure current_user is instantiated before checking it, or app would crash -->
+            <% if logged_in? && (article.user == current_user || current_user.admin?) %> <!--Must check logged_in? first to ensure current_user is instantiated before checking it, or app would crash -->
               <%= link_to "Edit", edit_article_path(article.id),
                           class: "btn btn-outline-primary btn-sm" %>
               <%= link_to "Delete", article_path(article.id),

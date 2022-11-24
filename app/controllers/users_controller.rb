@@ -48,7 +48,7 @@ class UsersController < ApplicationController
       session[:current_user_id] = @user.id
 
       # Generate a confirmation message for the user.
-      flash[:notice] = "Welcome #{@user.username}.  You have successfully signed up."
+      flash[:success] = "Welcome #{@user.username}.  You have successfully signed up."
 
       # Now that the user is saved, we need to tell Rails what to do.
       # Convention would take the app user to the newly created user's Show page
@@ -106,8 +106,8 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    # 1.  Log user out
-    session[:current_user_id] = nil
+    # 1.  Log user out IFF they are the account owner
+    session[:current_user_id] = nil if @user == current_user
     # 2.  destroy user and all articles authored by user.  Articles destroy happens due to
     #     "has_many :articles, dependent: :destroy" in user.rb.  Amazing
     @user.destroy
@@ -132,8 +132,8 @@ class UsersController < ApplicationController
   end
 
   def require_same_user
-    return unless current_user != @user
-    flash[:alert] = 'You can only modify your own profile'
+    return unless current_user != @user && !current_user.admin?
+    flash[:warning] = 'You can only modify your own profile'
     redirect_to @user
   end
 end

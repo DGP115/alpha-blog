@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email_address: params[:session][:email_address].downcase)
 
-    #  Note my style by style guide prefers the "&." operator versus if user && user.authenticate...
+    #  Not my style by style guide prefers the "&." operator versus if user && user.authenticate...
     if user&.authenticate(params[:session][:password])
       # Record id of successfully logged-in user in session object (physically stored by Rails
       # in a cookie)

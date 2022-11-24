@@ -1,8 +1,12 @@
 <!-- Add display of flash messages, if there are any -->
 <div class="container">
   <% flash.each do |type, msg| %>
-    <% if type == 'warning' %>
+    <% if type == 'alert' %>
+      <% message_type = 'alert-danger' %>
+    <% elsif type == 'warning' %>
       <% message_type = 'alert-warning' %>
+    <% elsif type == 'notice' %>
+      <% message_type = 'alert-success' %>
     <% else %>
       <% message_type = 'alert-secondary' %>
     <% end %>

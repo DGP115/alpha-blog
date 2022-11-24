@@ -35,6 +35,7 @@ class ArticlesController < ApplicationController
     #   1. use the .require method to identify that it is the article resource we want
     #   2. .permit  method to specifically retrieve the attributes listed
     @article = Article.new(whitelist_article_params)
+    @article.user_id = current_user.id
 
     if @article.save
       #
@@ -142,8 +143,8 @@ class ArticlesController < ApplicationController
   end
 
   def require_same_user
-    return unless current_user != @article.user
-    flash[:alert] = 'You can only modify articles authored by you'
+    return unless current_user != @article.user && !current_user.admin?
+    flash[:warning] = 'You can only modify articles authored by you'
     redirect_to @article
   end
 end
