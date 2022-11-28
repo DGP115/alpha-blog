@@ -12,6 +12,7 @@ class SessionsController < ApplicationController
       # Record id of successfully logged-in user in session object (physically stored by Rails
       # in a cookie)
       session[:current_user_id] = user.id
+      debugger
       flash[:info] = 'Login was successful.'
       redirect_to user
     else

@@ -1,0 +1,33 @@
+<h5 class="text-center mt-4">Category: <%= @category.name %></h5>
+<div class="container">
+
+	<div class="row justify-content-md-center">
+		<div class="col-3 mt-1">
+			<div class="card text-center shadow mb-2 bg-white rounded">
+
+				<div class="card-body">
+					<div class="card-text"><%= @category.name %></div>
+					<% if logged_in? && current_user.admin? %>
+						<%= link_to "Edit", edit_category_path(@category),
+												class: "btn btn-outline-primary btn-sm" %>
+						<%= link_to "Delete", category_path(@category),
+												class: "btn btn-outline-danger btn-sm",
+												data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+					<% end %>
+				</div>
+
+				<div class="card-footer text-muted">
+					<small>
+						Created <%= time_ago_in_words(@category.created_at) %> ago.  Edited <%=time_ago_in_words(@category.updated_at) %> ago
+					</small>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<%= link_to 'Return to Articles list' , articles_path,
+  data: { turbo_method: :index },class:"row justify-content-md-center text-decoration-none" %>
+
+

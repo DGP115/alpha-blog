@@ -9,7 +9,7 @@
       <h6 class="alert-heading">&#9888;The following error(s) occurred while trying to save the <%= obj.class.name.downcase %> as entered:</h6>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       <% obj.errors.full_messages.each do |msg| %>
-        <li class="small"><%= msg %></li>
+        <li class="small mb-2"><%= msg %></li>
       <% end %>
     </div>
   </div>
