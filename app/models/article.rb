@@ -17,6 +17,8 @@ class Article < ApplicationRecord
   #   and length limits as shown.
   #   Do the same for article attribute "description"
   belongs_to :user
+  has_many  :article_categories
+  has_many  :categories, through: :article_categories
   validates :title, presence: true, length: { minimum: 6, maximum: 100 }
   validates :description, presence: true, length: { minimum: 10, maximum: 300 }
 end
