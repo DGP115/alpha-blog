@@ -1,14 +1,4 @@
-<div class="container">
-  <% @categories.each do |category| %>
-    <div class="row mt-1 justify-content-md-center">
-      <div class="col-3">
-        <div class="card text-center shadow bg-white rounded">
-          <h6 class="card-title mt-1 mb-1">
-            <%= link_to category.name, category_path(category),
-                        class: 'link-dark text-decoration-none' %>
-          </h6>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</div>
+<%= link_to category.name,  category_path(category),
+                            class: "badge rounded-pill mybadge-background mybadge-text" %>
+
+

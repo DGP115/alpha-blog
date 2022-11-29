@@ -30,13 +30,44 @@ class CategoriesController < ApplicationController
   end
 
   def show
+    # Instantiate the current category as passed from the browser via the Index page
     @category = Category.find(params[:id])
+    # In preparation for the category show page, get a list of the articles in this category.
+    # Note @articles, here, is an array, not an object
+    @articles = @category.articles.paginate(page: params[:page], per_page: 5)
+                         .order('created_at DESC')
   end
 
   def index
     # Utilizing the will_paginate gem to include pagination as this code was
     # @categories= Category.all, which could return many rows
-    @categories = Category.paginate(page: params[:page], per_page: 8).order('name ASC')
+    @categories = Category.paginate(page: params[:page], per_page: 16).order('name ASC')
+  end
+
+  def edit
+    @category = Category.find(params[:id])
+  end
+
+  def update
+    # Instantiate the current category as passed from the browser via the Edit page
+    @category = Category.find(params[:id])
+
+    if @category.update(whitelist_category_params)
+      #
+      # Generate a confirmation message for the user.
+      flash[:notice] = 'Category was updated successfully.'
+
+      # Now that the category is updated, we need to tell Rails what to do.
+      redirect_to category_path
+
+    else
+
+      # Error trapping
+      # Re-render the "edit" article page.
+      # Because the save returned false, the error trapping on the "edit" page
+      # will display the errors
+      render 'edit', status: :unprocessable_entity
+    end
   end
 
   private
