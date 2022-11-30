@@ -70,6 +70,38 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def destroy
+    # Instantiate the current category as passed from the browser
+    @category = Category.find(params[:id])
+
+    if @category.destroy
+      #
+      # Generate a confirmation message for the user.
+      flash[:notice] = 'Category was deleted successfully.'
+
+      # Now that the article is deleted, we need to tell Rails what to do.
+      # Convention would take the user to the articles list page
+      #
+      # Note:  We knew that the path to the articles listing page is articles_path because
+      # from $rails routes --expanded we see:
+      # [ Route 3 ]-----------------------------------------------------------------
+      # Prefix            | articles  <-- Therefore the path is articles_path
+      # Verb              | GET
+      # URI               | /articles(.:format)
+      # Controller#Action | articles#index
+
+      redirect_to categories_path
+
+    else
+
+      # Error trapping
+      # Re-render the "edit" article page.
+      # Because the save returned false, the error trapping on the "edit" page
+      # will display the errors
+      render 'edit', status: :unprocessable_entity
+    end
+  end
+
   private
 
   def whitelist_category_params
