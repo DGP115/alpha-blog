@@ -20,7 +20,13 @@ Rails.application.routes.draw do
   # To expose the routes incrementally or as a subset, use the ",only" modifier.
   # resources :articles, only: %i[show index new create edit update destroy]
   # Expose all routes of the articles resource
-  resources :articles
+  #
+  # Expose the routes for comments as nested by resources.
+  # This relfects the 1:many relationship and Rails will provide the parent article with each
+  # comment route
+  resources :articles do
+    resources :comments
+  end
 
   # Routes for User actions
   get 'signup', to: 'users#new'

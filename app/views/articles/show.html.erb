@@ -43,8 +43,14 @@
 				</div>
 
 			</div>
+			<h6>Comments:</h6>
+			<%= render @article.comments %>
+			<h6>Care to comment?</h5>
+			<%= render 'comments/form' %>
 		</div>
+
 	</div>
+
 </div>
 
 <%= link_to 'Return to Articles list' , articles_path(@article.id),
