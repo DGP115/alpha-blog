@@ -26,14 +26,14 @@ Classes that define columns of 1/3 width and 2/3 width
 }
 
 .myaccordian-text {
-  font-size: 12px;
+  font-size: 14px;
   color: midnightblue;
   margin-left: 5px;
   margin-top: 10px;
 }
 
 .myaccordion {
-  background: -webkit-linear-gradient(to right,#bdbec4, #acaee0);
+  background: -webkit-linear-gradient(to right,#bdbec4,#acaee0);
   background: -moz-linear-gradient(to right,#bdbec4, #acaee0);
   background: linear-gradient(to right,#bdbec4, #acaee0);
   color: black;
@@ -46,4 +46,6 @@ Classes that define columns of 1/3 width and 2/3 width
   outline: 1px;
   font-size: 14px;
   transition: 0.4s;
+  border-color:black;
+  border-width: 2px;
 }

@@ -37,8 +37,11 @@
             <% end %>
 
 					  <ul class="small mt-1">
-						  <ul>Created <%=time_ago_in_words(article.created_at)%> ago.</ul>
-						  <ul>Edited <%=time_ago_in_words(article.updated_at)%> ago.</ul>
+              <ul>
+                Created <%=time_ago_in_words(article.created_at)%> ago.
+                Edited <%=time_ago_in_words(article.updated_at)%> ago.
+              </ul>
+              <ul>This article has garnered <%=pluralize(article.comments.count, 'comment')%>.</ul>
 					  </ul>
           </div>
 

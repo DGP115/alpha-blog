@@ -37,16 +37,19 @@
 					<% end %>
 
 					<ul class="small mt-1 text-center">
-						<ul>Created <%=time_ago_in_words(@article.created_at)%> ago.</ul>
-						<ul>Edited <%=time_ago_in_words(@article.updated_at)%> ago.</ul>
+						<ul>
+							Created <%=time_ago_in_words(@article.created_at)%> ago.
+							Edited <%=time_ago_in_words(@article.updated_at)%> ago.
+						</ul>
 					</ul>
 				</div>
 
 			</div>
 			<h6>Comments:</h6>
 			<%= render @article.comments %>
-			<h6>Care to comment?</h6>
+			<h6 class="mt-2">Care to comment?</h6>
 			<%= render 'comments/form' %>
+
 		</div>
 
 	</div>
@@ -54,5 +57,5 @@
 </div>
 
 <%= link_to 'Return to Articles list' , articles_path(@article.id),
-  data: { turbo_method: :index },class:"row justify-content-md-center text-decoration-none" %>
+  data: { turbo_method: :index },class:"mt-1 row justify-content-md-center text-decoration-none" %>
 

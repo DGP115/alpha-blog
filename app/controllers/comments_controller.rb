@@ -10,6 +10,15 @@ class CommentsController < ApplicationController
     redirect_to article_path(@article)
   end
 
+  def destroy
+    #  Recall the id of the parent article is "known" by the nested routes for Comments,
+    #  so params provides us with the parent article
+    @article = Article.find(params[:article_id])
+    @comment = @article.comments.find(params[:id])
+    @comment.destroy
+    redirect_to article_path(@article)
+  end
+
   private
 
   def whitelist_comment_params
